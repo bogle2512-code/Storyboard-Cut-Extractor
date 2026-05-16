@@ -76,6 +76,36 @@ project-name/
 
 GitHub에 업로드한 뒤 Pages에서 루트 폴더를 배포하면 됩니다.
 
+### 배포 순서
+
+1. 저장소 루트에 아래 파일이 있는지 확인합니다.
+
+```text
+index.html
+app.js
+styles.css
+manifest.webmanifest
+service-worker.js
+icon-192.png
+icon-512.png
+src/
+```
+
+2. GitHub 저장소에 파일을 업로드합니다.
+3. 저장소의 `Settings`로 이동합니다.
+4. `Pages` 메뉴를 엽니다.
+5. `Build and deployment`에서 `Deploy from a branch`를 선택합니다.
+6. Branch는 `main`, 폴더는 `/root`를 선택합니다.
+7. 저장 후 GitHub Pages 주소로 접속합니다.
+
+CSS와 JS는 모두 상대경로를 사용합니다.
+
+```html
+<link rel="stylesheet" href="./styles.css">
+<script src="./app.js"></script>
+<link rel="manifest" href="./manifest.webmanifest">
+```
+
 ## Real-ESRGAN 로컬 업스케일러
 
 고급 업스케일링 연동을 위한 Python 구조는 `local-upscaler` 폴더에 있습니다.

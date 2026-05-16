@@ -1,0 +1,23 @@
+{
+  "name": "Storyboard Cut Extractor",
+  "short_name": "Storyboard",
+  "description": "Upload a storyboard image, select cuts, preview exports, and download size-based ZIP files locally.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#101511",
+  "theme_color": "#101511",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
