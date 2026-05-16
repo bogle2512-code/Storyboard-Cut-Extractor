@@ -1,0 +1,674 @@
+:root {
+  color: #17201b;
+  background: #f4f1ea;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  min-height: 38px;
+  border: 1px solid #c8c8bc;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1c241f;
+  cursor: pointer;
+  padding: 0 14px;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+button:hover:not(:disabled) {
+  border-color: #637064;
+  box-shadow: 0 6px 20px rgb(36 42 35 / 10%);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  color: #9b9d96;
+  cursor: not-allowed;
+}
+
+.primary,
+button.active {
+  border-color: #315c52;
+  background: #315c52;
+  color: #ffffff;
+}
+
+.danger {
+  color: #9d2e28;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.workspace {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 48px);
+  overflow: hidden;
+  border: 1px solid #d9d6cc;
+  background: #faf9f5;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 20px;
+  border-bottom: 1px solid #d9d6cc;
+  background: #fbfaf7;
+}
+
+.topbar h1 {
+  margin: 2px 0 0;
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #65706b;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.topActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.topActions input {
+  display: none;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  min-height: 0;
+  flex: 1;
+}
+
+.imagePanel {
+  min-width: 0;
+  min-height: 560px;
+  padding: 18px;
+  background: #222823;
+}
+
+.previewStage {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+}
+
+.canvasShell {
+  position: relative;
+  max-width: 100%;
+  max-height: calc(100vh - 150px);
+  touch-action: none;
+}
+
+.canvasShell.selecting {
+  cursor: crosshair;
+}
+
+.canvasShell canvas {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 150px);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 30%);
+  user-select: none;
+}
+
+.cutBox {
+  position: absolute;
+  border: 2px solid #f7d35c;
+  background: rgb(247 211 92 / 10%);
+  pointer-events: none;
+}
+
+.cutBox.manual {
+  border-color: #60d0a9;
+  background: rgb(96 208 169 / 12%);
+}
+
+.cutBox.draft {
+  border-style: dashed;
+  border-color: #ffffff;
+  background: rgb(255 255 255 / 10%);
+}
+
+.captureBox {
+  position: absolute;
+  border: 2px solid #4fb7ff;
+  background: rgb(79 183 255 / 8%);
+  pointer-events: none;
+}
+
+.captureBox.warning {
+  border-color: #ffb84f;
+  background: rgb(255 184 79 / 10%);
+}
+
+.cutBox span {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  display: grid;
+  min-width: 28px;
+  height: 24px;
+  place-items: center;
+  background: #f7d35c;
+  color: #1d201b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.dropTarget {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  width: min(640px, 100%);
+  min-height: 360px;
+  border: 1px dashed #879086;
+  background: rgb(255 255 255 / 4%);
+  color: #ffffff;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.dropTarget input {
+  display: none;
+}
+
+.dropTarget strong {
+  font-size: 24px;
+}
+
+.dropTarget span {
+  color: #c9d2cb;
+}
+
+.sidePanel {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  border-left: 1px solid #d9d6cc;
+  background: #f7f6f1;
+}
+
+.statusBar {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  border-bottom: 1px solid #dedbd2;
+}
+
+.statusBar strong {
+  font-size: 22px;
+}
+
+.statusBar span {
+  color: #65706b;
+  font-size: 14px;
+}
+
+.exportSettings {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #dedbd2;
+  background: #eeece4;
+}
+
+.exportSettings label {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.settingBlock,
+.exportButtons {
+  display: grid;
+  gap: 8px;
+}
+
+.settingBlock.full,
+.exportButtons.full {
+  grid-column: 1 / -1;
+}
+
+.checkboxGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.checkboxGrid label,
+.checkLine {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  border: 1px solid #d3d1c8;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 6px 8px;
+  color: #17201b;
+  font-size: 13px;
+}
+
+.exportButtons {
+  grid-template-columns: 1fr 1fr;
+}
+
+.modeTabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.resizeChoices {
+  display: grid;
+  gap: 8px;
+}
+
+.choiceCard {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 8px;
+  align-items: start;
+  border: 1px solid #344039;
+  border-radius: 8px;
+  background: #101611;
+  padding: 10px;
+}
+
+.choiceCard strong,
+.choiceCard small {
+  grid-column: 2;
+}
+
+.choiceCard small {
+  color: #9aac9f;
+  line-height: 1.45;
+}
+
+.choiceCard.recommended {
+  border-color: #55b58b;
+}
+
+.warningText {
+  margin: 0;
+  border: 1px solid #aa6b35;
+  border-radius: 8px;
+  background: #2a1d12;
+  color: #ffd5a8;
+  padding: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+body:not(.expertMode) .expertOnly {
+  display: none;
+}
+
+.exportPreviewPanel {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-bottom: 1px solid #303932;
+  background: #101611;
+}
+
+.exportPreviewPanel[hidden] {
+  display: none;
+}
+
+.exportPreviewPanel > strong {
+  font-size: 14px;
+}
+
+.exportPreviewGrid {
+  display: grid;
+  gap: 10px;
+}
+
+.exportPreviewGroup {
+  border: 1px solid #303932;
+  border-radius: 8px;
+  background: #151b17;
+  padding: 10px;
+}
+
+.exportPreviewGroup summary {
+  cursor: pointer;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.exportPreviewItems {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.exportPreviewItem {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.exportPreviewItem img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border: 1px solid #303932;
+  border-radius: 6px;
+  background: #050806;
+}
+
+.exportPreviewItem figcaption {
+  color: #9aac9f;
+  font-size: 12px;
+}
+
+.exportPreviewItem em {
+  display: block;
+  margin-top: 3px;
+  color: #ffd37a;
+  font-style: normal;
+}
+
+.exportSettings span {
+  color: #65706b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.exportSettings select,
+.exportSettings input[type="text"],
+.exportSettings input[type="number"] {
+  width: 100%;
+  min-height: 36px;
+  border: 1px solid #c8c5bb;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #17201b;
+  padding: 0 8px;
+}
+
+.cutsGrid {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  overflow: auto;
+  padding: 14px;
+}
+
+.cutCard {
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  gap: 12px;
+  border: 1px solid #dad7cf;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 10px;
+}
+
+.thumbWrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  background: #202520;
+}
+
+.thumbWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.badge {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  display: grid;
+  min-width: 28px;
+  height: 22px;
+  place-items: center;
+  background: #ffffff;
+  color: #17201b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.cardBody {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: 8px;
+}
+
+.cardBody input {
+  width: 100%;
+  min-height: 36px;
+  border: 1px solid #d3d1c8;
+  border-radius: 6px;
+  padding: 0 10px;
+  color: #17201b;
+}
+
+.meta {
+  color: #72766f;
+  font-size: 13px;
+}
+
+.cardActions {
+  display: grid;
+  grid-template-columns: 42px 42px minmax(112px, 1fr) 54px;
+  gap: 6px;
+}
+
+.cardActions button {
+  min-width: 0;
+  min-height: 34px;
+  padding: 0 8px;
+  font-size: 13px;
+}
+
+.emptyState {
+  display: grid;
+  min-height: 180px;
+  place-items: center;
+  border: 1px dashed #c8c5bb;
+  border-radius: 8px;
+  color: #777c74;
+  text-align: center;
+}
+
+@media (max-width: 980px) {
+  .app {
+    padding: 12px;
+  }
+
+  .workspace {
+    min-height: calc(100vh - 24px);
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .topActions {
+    justify-content: flex-start;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .imagePanel {
+    min-height: 420px;
+  }
+
+  .previewStage {
+    min-height: 380px;
+  }
+
+  .sidePanel {
+    border-left: 0;
+    border-top: 1px solid #d9d6cc;
+  }
+}
+
+@media (max-width: 560px) {
+  .topActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .topActions button {
+    width: 100%;
+  }
+
+  .exportSettings {
+    grid-template-columns: 1fr;
+  }
+
+  .checkboxGrid,
+  .exportButtons,
+  .exportPreviewItems {
+    grid-template-columns: 1fr;
+  }
+
+  .cutCard {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark production workspace theme. */
+:root {
+  color: #f2f5ef;
+  background: #101511;
+}
+
+button {
+  border-color: #3c473f;
+  background: #1b231d;
+  color: #f2f5ef;
+}
+
+button:hover:not(:disabled) {
+  border-color: #7aa48d;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 24%);
+}
+
+.primary,
+button.active {
+  border-color: #55b58b;
+  background: #26745a;
+}
+
+.workspace,
+.topbar {
+  border-color: #303932;
+  background: #151b17;
+}
+
+.topbar {
+  border-bottom-color: #303932;
+}
+
+.eyebrow,
+.statusBar span,
+.exportSettings span,
+.meta,
+.emptyState {
+  color: #9aac9f;
+}
+
+.imagePanel {
+  background: #0e130f;
+}
+
+.sidePanel {
+  border-left-color: #303932;
+  background: #121814;
+}
+
+.statusBar,
+.exportSettings {
+  border-bottom-color: #303932;
+}
+
+.exportSettings {
+  background: #18201b;
+}
+
+.checkboxGrid label,
+.checkLine,
+.cutCard {
+  border-color: #303932;
+  background: #18201b;
+  color: #f2f5ef;
+}
+
+.exportSettings select,
+.exportSettings input[type="text"],
+.exportSettings input[type="number"],
+.cardBody input {
+  border-color: #344039;
+  background: #101611;
+  color: #f2f5ef;
+}
+
+.cutCard {
+  background: #18201b;
+}
+
+.emptyState {
+  border-color: #435047;
+}
